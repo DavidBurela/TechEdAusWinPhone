@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.Data.OData.WindowsPhone</id>
+    <version>5.0.0.0</version>
+    <title>ODataLib for WIndows Phone</title>
+    <authors>Microsoft Corporation</authors>
+    <owners>Microsoft Corporation</owners>
+    <licenseUrl>http://go.microsoft.com/?linkid=9809688</licenseUrl>
+    <projectUrl>http://www.odata.org/</projectUrl>
+    <iconUrl>http://static.tumblr.com/hgchgxz/9ualgdf98/icon.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>Classes to serialize, deserialize and validate OData payloads. Enables construction of OData producers and consumers. Targets Windows Phone 7.1/8.0. Localized for CHS, CHT, DEU, ESN, FRA, ITA, JPN, KOR and RUS.</description>
+    <summary>Classes to serialize, deserialize and validate OData payloads. Enables construction of OData producers and consumers.Targets Windows Phone 7.1/8.0.Localized for CHS, CHT, DEU, ESN, FRA, ITA, JPN, KOR</summary>
+    <releaseNotes>Initial release of ODataLib for WIndows Phone</releaseNotes>
+    <copyright>Copyright 2012</copyright>
+    <tags>wcf data services odata odatalib edmlib spatial ado.net ef entity framework open protocol wcfds wcfdataservices dataservices</tags>
+  </metadata>
+</package>

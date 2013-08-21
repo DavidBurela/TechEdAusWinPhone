@@ -58,6 +58,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Coding4Fun.Phone.Controls.1.6.1\lib\sl4-windowsphone71\Coding4Fun.Phone.Controls.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Data.Edm.WP71">
+      <HintPath>..\packages\Microsoft.Data.OData.WindowsPhone.5.0.0.0\lib\sl4-windowsphone71\Microsoft.Data.Edm.WP71.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData.WP71">
+      <HintPath>..\packages\Microsoft.Data.OData.WindowsPhone.5.0.0.0\lib\sl4-windowsphone71\Microsoft.Data.OData.WP71.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Services.Client.WP71">
+      <HintPath>..\packages\Microsoft.Data.Services.Client.WindowsPhone.5.0.0.0\lib\sl4-windowsphone71\Microsoft.Data.Services.Client.WP71.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Controls" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit">
@@ -71,9 +80,11 @@
       <HintPath>Dependencies\RestSharp.WindowsPhone.dll</HintPath>
     </Reference>
     <Reference Include="system.data.linq" />
-    <Reference Include="System.Data.Services.Client, Version=7.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Spatial.WP71">
+      <HintPath>..\packages\Microsoft.Data.OData.WindowsPhone.5.0.0.0\lib\sl4-windowsphone71\System.Spatial.WP71.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
