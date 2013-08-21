@@ -25,7 +25,7 @@ namespace ConferenceStarterKit
         public static ObservableCollection<SessionItemModel> Sessions;
         public static ObservableCollection<SpeakerItemModel> Speakers;
 
-        public static ObservableCollection<SessionItemModel> SavedSessions;
+        public static List<int> SavedSessionIds;
 
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
@@ -75,11 +75,11 @@ namespace ConferenceStarterKit
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            //get state from iso
-            IEnumerable<SessionItemModel> savedSessionsListFromIsoStorage = null;
-            IsolatedStorageSettings.ApplicationSettings.TryGetValue<IEnumerable<SessionItemModel>>("SavedSessions", out savedSessionsListFromIsoStorage);
+            // get state from iso
+            IEnumerable<int> savedSessionsListFromIsoStorage = null;
+            IsolatedStorageSettings.ApplicationSettings.TryGetValue("SavedSessionIds", out savedSessionsListFromIsoStorage);
             if (savedSessionsListFromIsoStorage != null)
-                SavedSessions = savedSessionsListFromIsoStorage.OrderBy(p => p.Date).ToObservableCollection();
+                SavedSessionIds = savedSessionsListFromIsoStorage.ToList();
         }
 
 
@@ -89,9 +89,11 @@ namespace ConferenceStarterKit
         {
             if (!e.IsApplicationInstancePreserved)
             {
-                //get state from iso
-                IsolatedStorageSettings.ApplicationSettings.TryGetValue<ObservableCollection<SessionItemModel>>("SavedSessions", out SavedSessions);
-
+                // get state from iso
+                IEnumerable<int> savedSessionsListFromIsoStorage = null;
+                IsolatedStorageSettings.ApplicationSettings.TryGetValue("SavedSessionIds", out savedSessionsListFromIsoStorage);
+                if (savedSessionsListFromIsoStorage != null)
+                    SavedSessionIds = savedSessionsListFromIsoStorage.ToList();
             }
         }
 
@@ -104,10 +106,10 @@ namespace ConferenceStarterKit
 
         private static void SaveAppSettings()
         {
-            if (IsolatedStorageSettings.ApplicationSettings.Contains("SavedSessions"))
-                IsolatedStorageSettings.ApplicationSettings.Remove("SavedSessions");
+            if (IsolatedStorageSettings.ApplicationSettings.Contains("SavedSessionIds"))
+                IsolatedStorageSettings.ApplicationSettings.Remove("SavedSessionIds");
 
-            IsolatedStorageSettings.ApplicationSettings["SavedSessions"] = SavedSessions.ToList();
+            IsolatedStorageSettings.ApplicationSettings["SavedSessionIds"] = SavedSessionIds.ToList();
             IsolatedStorageSettings.ApplicationSettings.Save();
         }
 

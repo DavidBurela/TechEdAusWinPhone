@@ -46,20 +46,20 @@ namespace ConferenceStarterKit.ViewModels
                 NotifyPropertyChanged("Filter");
             }
         }
-       
+
         public MainViewModel()
         {
             Service.DataLoaded += new LoadEventHandler(Service_DataLoaded);
             IsLoading = true;
-            LoadData();           
+            LoadData();
         }
 
         void Service_DataLoaded(object sender, LoadEventArgs e)
         {
             this.IsDataLoaded = e.IsLoaded;
             IsLoading = false;
-        }        
- 
+        }
+
 
         private IConferenceService _Service;
         public IConferenceService Service
@@ -94,10 +94,10 @@ namespace ConferenceStarterKit.ViewModels
             App.Sessions = Sessions;
             App.Speakers = Speakers;
 
-            if (App.SavedSessions == null)
-                App.SavedSessions = new ObservableCollection<SessionItemModel>();
+            if (App.SavedSessionIds == null)
+                App.SavedSessionIds = new List<int>();
 
-            SavedSessions = App.SavedSessions;
-        }       
+            SavedSessions = App.Sessions.Where(p => App.SavedSessionIds.Contains(p.Id)).ToObservableCollection();
+        }
     }
 }

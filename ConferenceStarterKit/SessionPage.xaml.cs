@@ -36,16 +36,16 @@ namespace ConferenceStarterKit
             SessionViewModel vm = (SessionViewModel)this.LayoutRoot.DataContext;
             bool found = false;
 
-            foreach (SessionItemModel s in App.SavedSessions)
+            foreach (var s in App.SavedSessionIds)
             {
-                if (s.Title.Trim() == vm.Session.Title.Trim())
+                if (s == vm.Session.Id)
                 {
-                    App.SavedSessions.Remove(s);
+                    App.SavedSessionIds.Remove(s);
                     found = false;
                     break;
                 }
             }
-            App.SavedSessions.Add(vm.Session);
+            App.SavedSessionIds.Add(vm.Session.Id);
 
             //only add a reminder one time
             if (!found)

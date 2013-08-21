@@ -57,11 +57,11 @@ namespace ConferenceStarterKit
         {
             MenuItem i = (MenuItem)sender;
 
-            foreach (SessionItemModel s in App.SavedSessions)
+            foreach (var s in App.SavedSessionIds)
             {
-                if (s.Title == i.CommandParameter.ToString())
+                if (s == int.Parse(i.CommandParameter.ToString()))
                 {
-                    App.SavedSessions.Remove(s);
+                    App.SavedSessionIds.Remove(s);
                     break;
                 }
             }
