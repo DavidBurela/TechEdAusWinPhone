@@ -15,7 +15,9 @@ Features
 
 Downloading
 --------
-The application is available for free on the Windows Phone 7 marketplace. 
+The 2013 version will be available on the marketplace after certification.
+
+You can download the .xap right now to sideload onto your device https://github.com/DavidBurela/TechEdAusWinPhone/releases
 
 How I built it
 --------
