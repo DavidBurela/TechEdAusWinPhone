@@ -10,10 +10,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Collections.ObjectModel;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ConferenceStarterKit.ViewModels;
 using Infragistics.Controls.Interactions;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using Microsoft.Phone.Scheduler;
 
@@ -26,51 +28,77 @@ namespace ConferenceStarterKit
             InitializeComponent();
         }
 
-        private void appbar_pin_Click(object sender, EventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
 
+            SessionViewModel vm = (SessionViewModel)this.LayoutRoot.DataContext;
+
+
+            var appBarButton = (IApplicationBarIconButton)ApplicationBar.Buttons[0];
+            if (App.SavedSessionIds.ToList().Contains(vm.Session.Id))
+            {
+                appBarButton.IconUri = new Uri(@"/Images/appbar.favs.remove.png", UriKind.Relative);
+            }
+            else
+            {
+                appBarButton.IconUri = new Uri(@"/Images/appbar.favs.addto.rest.png", UriKind.Relative); 
+            }
         }
 
         private void appbar_add_Click(object sender, EventArgs e)
         {
+            var appBarButton = (IApplicationBarIconButton)ApplicationBar.Buttons[0];
             SessionViewModel vm = (SessionViewModel)this.LayoutRoot.DataContext;
-            bool found = false;
 
-            foreach (var s in App.SavedSessionIds)
+            bool found = false;
+            foreach (var s in App.SavedSessionIds.ToList())
             {
                 if (s == vm.Session.Id)
                 {
                     App.SavedSessionIds.Remove(s);
-                    found = false;
-                    break;
+                    found = true;
                 }
             }
-            App.SavedSessionIds.Add(vm.Session.Id);
 
-            //only add a reminder one time
-            if (!found)
+            // if we found an existing favourite and removed it, then display a message and try to remove the reminder.
+            if (found)
             {
-                try
-                {
-                    Reminder reminder = new Reminder(vm.Session.Title);
-                    reminder.BeginTime = vm.Session.Date;
-                    reminder.RecurrenceType = RecurrenceInterval.None;
-
-                    ScheduledActionService.Add(reminder);
-                    XamMessageBox.Show("Favourite added", "The session was added to your favourites.",
+                appBarButton.IconUri = new Uri(@"/Images/appbar.favs.addto.rest.png", UriKind.Relative);
+                XamMessageBox.Show("Removed", "This session has been removed from your favourites.",
                         () => { },
                         VerticalPosition.Center,
                         new XamMessageBoxCommand("OK", () => { }));
+                try
+                {
+                    ScheduledActionService.Remove(vm.Session.Title);
                 }
                 catch (Exception)
                 {
-                    //need to let use know we cound not add a reminder?
-                    XamMessageBox.Show("Already a favourite", "This session is already a favourite.",
+                    // COM errors happen when trying to add/remove reminders that don't exist.
+                }
+                return;
+            }
+
+            App.SavedSessionIds.Add(vm.Session.Id);
+            appBarButton.IconUri = new Uri(@"/Images/appbar.favs.remove.png", UriKind.Relative);
+            XamMessageBox.Show("Added", "The session was added to your favourites.",
                         () => { },
                         VerticalPosition.Center,
                         new XamMessageBoxCommand("OK", () => { }));
-                }
 
+            // add a reminder
+            try
+            {
+                Reminder reminder = new Reminder(vm.Session.Title);
+                reminder.BeginTime = vm.Session.Date.AddMinutes(-10);   // remind the user 10 minutes before the session starts
+                reminder.RecurrenceType = RecurrenceInterval.None;
+
+                ScheduledActionService.Add(reminder);
+            }
+            catch (Exception)
+            {
+                // for some reason a COM exception happens sometimes when adding a reminder
             }
         }
 

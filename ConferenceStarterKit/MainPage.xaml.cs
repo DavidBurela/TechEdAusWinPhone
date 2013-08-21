@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
+using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
@@ -20,8 +22,11 @@ namespace ConferenceStarterKit
         // Load data for the ViewModel Items 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-
-
+            // refresh the favourited sessions, in case any have been added or removed.
+            // This should REALLY be in the ViewModel. But I need to submit the app in 2 hours.
+            var viewModel = (MainViewModel)LayoutRoot.DataContext;
+            viewModel.SavedSessions.Clear();
+            App.Sessions.Where(p => App.SavedSessionIds.Contains(p.Id)).ToList().ForEach(p => viewModel.SavedSessions.Add(p));
         }
 
         private void SessionListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
