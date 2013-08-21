@@ -67,6 +67,8 @@ namespace ConferenceStarterKit
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
+            WebRequest.RegisterPrefix("http://", SharpGIS.WebRequestCreator.GZip);
+            WebRequest.RegisterPrefix("https://", SharpGIS.WebRequestCreator.GZip);
         }
 
         // Code to execute when the application is launching (eg, from Start)

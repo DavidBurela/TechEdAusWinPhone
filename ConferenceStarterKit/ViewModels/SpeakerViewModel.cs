@@ -47,8 +47,8 @@ namespace ConferenceStarterKit.ViewModels
         public void LoadData()
         {
             Speaker = App.CurrentSpeaker;
-            Speaker.Sessions = App.Sessions.Where(p => p.Speakers.Contains(Speaker)).ToObservableCollection();
-            Twitter = Service.GetTwitterFeed(Speaker.Twitter);
+            Speaker.Sessions = App.Sessions.Where(p => p.SpeakerIds.Contains(Speaker.Id)).ToObservableCollection();
+            // Twitter = Service.GetTwitterFeed(Speaker.Twitter);   // No Twitter data at TechEd 2013
         }   
     }
 }

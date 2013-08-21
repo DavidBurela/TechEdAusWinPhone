@@ -98,8 +98,6 @@ namespace ConferenceStarterKit.ViewModels
                 App.SavedSessions = new ObservableCollection<SessionItemModel>();
 
             SavedSessions = App.SavedSessions;
-
-            
         }       
     }
 }

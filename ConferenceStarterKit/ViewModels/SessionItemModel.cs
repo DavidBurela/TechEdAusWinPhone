@@ -8,6 +8,7 @@
 ﻿//    -------------------------------------------------------------------------------------------- 
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace ConferenceStarterKit.ViewModels
@@ -22,7 +23,6 @@ namespace ConferenceStarterKit.ViewModels
         private string _sponsor;
         private string _location;        
         private string _track;
-        private ObservableCollection<SpeakerItemModel> _speakers;
 
         //these are available on the json service. Not sure how to use them
         private int _timeslotid;
@@ -135,8 +135,14 @@ namespace ConferenceStarterKit.ViewModels
         }
 
         public string CodeAndTitle { get { return String.Concat(Code, " - ", Title); }}
-        public ObservableCollection<SpeakerItemModel> Speakers{get;set;}
-            
+        //public ObservableCollection<SpeakerItemModel> Speakers{get;set;}
+
+        private List<int> _speakerIds = new List<int>();
+        public List<int> SpeakerIds
+        {
+            get { return _speakerIds; }
+            private set { _speakerIds = value; }
         }
+    }
      
 }
