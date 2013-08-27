@@ -29,6 +29,13 @@ Packages used
 * YLAD (Your Last About Dialog) - [http://ylad.codeplex.com/](http://ylad.codeplex.com/)
 * Windows Phone Icons Maker [http://wpiconmaker.codeplex.com/](http://wpiconmaker.codeplex.com/)
 
+Screenshots
+--------
+![Schedule](marketplace%20submission/screenshots/schedule%20grouping.png)
+
+[More Screenshots](https://github.com/DavidBurela/TechEdAusWinPhone/tree/master/marketplace%20submission/screenshots)
+
+
 Notes
 --------
 The [NetAdvantage controls for Windows Phone](http://www.infragistics.com/products/windows-phone) were used to build this application. A license is required to build the source code. However you can download a trial to play with it [http://www.infragistics.com/products/windows-phone/downloads](http://www.infragistics.com/products/windows-phone/downloads)
